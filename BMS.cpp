@@ -94,9 +94,13 @@ public:
         }
     }
 
-    int accounting(node* head){
-        int ch1, ch2, exit1 = 1,exit2 = 1;
+int main()
+{
+    node obj;
+    node *head = NULL;
+    cout << "Welcome to ABC Bank\n";
 
+    int ch1, ch2, exit1 = 1,exit2 = 1;
     repeat:
     while (exit1 == 1)
     {
@@ -133,7 +137,10 @@ public:
         cout << "\nEnter 1 for View Balance, Enter 0 for logout\n";
         cin>>ch2;
         switch(ch2){
-            case 1: break;
+            case 1: {
+                cout<<"Balance: " <<obj.balance <<endl;
+                break;
+            }
             case 0: {
                 exit1=1;
                 goto repeat;
@@ -142,12 +149,6 @@ public:
             default: cout<<"Wrong input\n";
         }
     }
-    }
 
-int main()
-{
-    cout << "Welcome to ABC Bank\n";
-    node *head = NULL;
-    accounting(head);   
     return 0;
 }
