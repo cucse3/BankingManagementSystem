@@ -18,8 +18,7 @@ class Node{
 
 };
 
-    Node* CreateAccount(Node* root){
-        if(root==NULL){
+
     void CreateAccount(Node* &head,Node* &tail){
         string name;
         int acc,pass,bal;
@@ -34,18 +33,7 @@ class Node{
 
         if(head==NULL){
             Node* temp;
-            string name;
-            int acc,pass,bal;
-            cout<<"Enter Name : ";
-            cin>>name;
-            cout<<"Enter Account No. : ";
-            cin>>acc;
-            cout<<"Enter PassCode : ";
-            cin>>pass;
-            cout<<"Enter Balance : ";
-            cin>>bal;
             temp=new Node(name,acc,pass,bal);
-            return temp;
             head=temp;
             tail=temp;
         }
@@ -90,13 +78,10 @@ class Node{
     }
 int main() {
     // Node* root=new Node("Rahul",123456789,1568,9999);
-
-    Node* root=NULL;
-    root=CreateAccount(root);
-    cout<<"Name : "<<root->name<<endl;
-    cout<<"Account No. "<<root->account_No<<endl;
-    cout<<"Password : "<<root->passcode<<endl;
-    cout<<"Balance : "<<root->balance<<endl;
+    // cout<<"Name : "<<root->name<<endl;
+    // cout<<"Account No. "<<root->account_No<<endl;
+    // cout<<"Password : "<<root->passcode<<endl;
+    // cout<<"Balance : "<<root->balance<<endl;
     Node* head=NULL;
     Node* tail=NULL;
 
