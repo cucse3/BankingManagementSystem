@@ -7,8 +7,20 @@ public:
     string name;
     long int account_number;
     int PIN;
+    double balance=0.0;
     node *next;
     node() {}
+
+    node(string name, int PIN, long int account_no, double balance)
+    {
+        this->name = name;
+        account_number = account_no;
+        this->PIN = PIN;
+        this->balance=balance;
+        next = NULL;
+    }
+
+};
 
     int random()
     {
@@ -19,16 +31,9 @@ public:
         return randomInteger;
     }
 
-    node(string name, int PIN, long int account_no)
-    {
-        this->name = name;
-        account_number = account_no;
-        this->PIN = PIN;
-        next = NULL;
-    }
-
     void create_account(node *&head)
     {
+        node obj;
         string name;
         int PIN;
         long int account_no = random();
@@ -39,7 +44,7 @@ public:
         cout << "Set a PIN for your account\n";
         cin >> PIN;
 
-        node *n = new node(name, PIN, account_no);
+        node *n = new node(name, PIN, account_no,obj.balance);
         if (head == NULL)
         {
             head = n;
@@ -84,30 +89,13 @@ public:
         }
         if (!found)
         {
-            cout << "Wrong account number or password\n";
+            cout << "Wrong account number or password\nRetry\n";
+            login(head);
         }
     }
 
-    void disp(node *head)
-    {
-        node *temp = head;
-        while (temp != NULL)
-        {
-            cout << "Name: " << temp->name << " ,";
-            cout << "Account no: " << temp->account_number << " ";
-            cout << endl;
-            temp = temp->next;
-        }
-    }
-};
-
-int main()
-{
-    cout << "Welcome to ABC Bank\n";
-    node obj;
-    node *head = NULL;
-
-    int ch1, ch2, exit1 = 1,exit2 = 1;
+    int accounting(node* head){
+        int ch1, ch2, exit1 = 1,exit2 = 1;
 
     repeat:
     while (exit1 == 1)
@@ -118,7 +106,7 @@ int main()
         {
         case 1:
         {
-            obj.create_account(head);
+            create_account(head);
             break;
         }
         case 2:
@@ -129,7 +117,7 @@ int main()
             }
             else
             {
-                obj.login(head);
+                login(head);
                 exit1 = 0;
             }
             break;
@@ -142,19 +130,24 @@ int main()
 
     while (exit2 == 1)
     {
-        cout << "\nEnter 1 for #, Enter 0 for logout\n";
+        cout << "\nEnter 1 for View Balance, Enter 0 for logout\n";
         cin>>ch2;
         switch(ch2){
             case 1: break;
             case 0: {
-                exit2 = 0;
+                exit1=1;
+                goto repeat;
                 break;
             }
             default: cout<<"Wrong input\n";
         }
     }
-    exit1=1;
-    goto repeat;
+    }
 
+int main()
+{
+    cout << "Welcome to ABC Bank\n";
+    node *head = NULL;
+    accounting(head);   
     return 0;
 }
