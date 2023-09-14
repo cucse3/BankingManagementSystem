@@ -1,3 +1,4 @@
+//To generate account number
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
