@@ -88,7 +88,7 @@ void deposit(node *user)
     cout << "Deposit successful. Updated balance: " << user->balance << endl;
 }
 
-    node* searchAccount(int accountNumber) {
+ node* searchAccount(int accountNumber) {
         node*head;
         node* temp = head;
         while (temp != NULL) {
@@ -101,6 +101,19 @@ void deposit(node *user)
         }
         cout<<"No Account Found\n";
         return NULL; 
+    }
+
+void updateAccount(int accountNumber, string newName) {
+       node* temp = searchAccount(accountNumber);
+        if (temp != NULL)
+        {
+            temp->name = newName;
+            cout << "Account information updated successfully!" << endl;
+        } 
+        else
+        {
+            cout << "Account not found!" << endl;
+        }
     }
 
 int main()
