@@ -88,6 +88,21 @@ void deposit(node *user)
     cout << "Deposit successful. Updated balance: " << user->balance << endl;
 }
 
+    node* searchAccount(int accountNumber) {
+        node*head;
+        node* temp = head;
+        while (temp != NULL) {
+            if (temp->account_number == accountNumber) 
+            {
+                cout<<"Account found\n";
+                return temp;
+            }
+            temp = temp->next;
+        }
+        cout<<"No Account Found\n";
+        return NULL; 
+    }
+
 int main()
 {
     node *head = NULL;
