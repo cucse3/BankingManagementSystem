@@ -117,11 +117,11 @@ void withdraw(node *user)
         return NULL; 
     }
 
-void updateAccount(int accountNumber, string newName) {
-       node* temp = searchAccount(accountNumber);
+void updateAccount(int accountNumber, int newPIN) {
+       node* temp;
         if (temp != NULL)
         {
-            temp->name = newName;
+            temp->PIN = newPIN;
             cout << "Account information updated successfully!" << endl;
         } 
         else
@@ -166,7 +166,7 @@ int main()
 
     while (true)
     {
-        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to delete , 0 to Exit\n";
+        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to update account info,Enter 4 to delete , 0 to Exit\n";
         cin >> ch1;
 
         switch (ch1)
@@ -217,7 +217,17 @@ int main()
                 }
             }
             break;
-        case 3:
+            case 3:
+            {
+                int accountNumber, newPIN;
+                cout << "Enter account number for PIN update: ";
+                cin >> accountNumber;
+                cout << "Enter new PIN: ";
+                cin >> newPIN;
+                updateAccount(accountNumber, newPIN);
+                break;
+            }
+        case 4:
             if (head == NULL) {
                 cout << "No Account Registered\n";
             }
