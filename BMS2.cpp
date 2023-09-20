@@ -129,6 +129,30 @@ void updateAccount(int accountNumber, string newName) {
             cout << "Account not found!" << endl;
         }
     }
+    
+void deleteAccount(node*& head, long int accountNumber) {
+    node* temp = head;
+    node* prev = NULL;
+
+    while (temp != NULL) {
+        if (temp->account_number == accountNumber) {
+            if (prev == NULL) {
+                
+                head = temp->next;
+            }
+            else {
+                prev->next = temp->next;
+            }
+
+            delete temp;
+            cout << "Account deleted successfully!\n";
+            return;
+        }
+        prev = temp;
+        temp = temp->next;
+    }
+    cout << "Account not found!\n";
+}
 
 int main()
 {
@@ -142,7 +166,7 @@ int main()
 
     while (true)
     {
-        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, 0 to Exit\n";
+        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to delete , 0 to Exit\n";
         cin >> ch1;
 
         switch (ch1)
@@ -193,6 +217,17 @@ int main()
                 }
             }
             break;
+        case 3:
+            if (head == NULL) {
+                cout << "No Account Registered\n";
+            }
+            else {
+                cout << "Enter Account number to delete: ";
+                long int delete_acc;
+                cin >> delete_acc;
+                deleteAccount(head, delete_acc);
+            }
+            break;    
         case 0:
             return 0;
         default:
