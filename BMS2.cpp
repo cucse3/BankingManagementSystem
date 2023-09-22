@@ -166,7 +166,7 @@ int main()
 
     while (true)
     {
-        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to update account info,Enter 4 to delete , 0 to Exit\n";
+        cout << "\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to Update Account info, Enter 4 to Delete Account , 0 to Exit\n";
         cin >> ch1;
 
         switch (ch1)
@@ -190,7 +190,7 @@ int main()
                 {
                     while (true)
                     {
-                        cout << "\nEnter 1 for View Balance, Enter 2 to Deposit, Enter 3 to withdraw, Enter 4 to update account information, Enter 0 for Logout\n";
+                        cout << "\nEnter 1 for View Balance, Enter 2 to Deposit, Enter 3 to withdraw, Enter 0 for Logout\n";
                         cin >> ch2;
                         switch (ch2)
                         {
