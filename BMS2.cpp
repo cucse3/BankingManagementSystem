@@ -117,18 +117,19 @@ void withdraw(node *user)
         return NULL; 
     }
 
-void updateAccount(int accountNumber, int newPIN) {
-       node* temp;
-        if (temp != NULL)
-        {
+   void updateAccount(node*& head, int accountNumber, int newPIN)
+{
+    node* temp = head;
+    while (temp != NULL) 
+    {
+        if (temp->account_number == accountNumber) {
             temp->PIN = newPIN;
             cout << "Account information updated successfully!" << endl;
-        } 
-        else
-        {
-            cout << "Account not found!" << endl;
+            
         }
+        temp = temp->next;
     }
+}
     
 void deleteAccount(node*& head, long int accountNumber) {
     node* temp = head;
@@ -217,16 +218,22 @@ int main()
                 }
             }
             break;
-            case 3:
-            {
-                int accountNumber, newPIN;
-                cout << "Enter account number for PIN update: ";
-                cin >> accountNumber;
-                cout << "Enter new PIN: ";
-                cin >> newPIN;
-                updateAccount(accountNumber, newPIN);
-                break;
-            }
+        case 3:
+         {
+          int accountNumber, newPIN;
+          cout << "Enter account number for PIN update: ";
+          cin >> accountNumber;
+          cout << "Enter new PIN: ";
+           cin >> newPIN;
+
+          updateAccount(head, accountNumber, newPIN);
+          {
+            cout << "Login Details:\n";
+            cout << "Account number: " << accountNumber << endl;
+             cout << "PIN: " << newPIN << endl;
+           }
+           break;
+           }
         case 4:
             if (head == NULL) {
                 cout << "No Account Registered\n";
