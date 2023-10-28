@@ -20,26 +20,34 @@ class Node {
 }
 
 public class BMS {
-    static long random() {
+    static long generateAccountNumber() {
         Random rand = new Random();
-        int min = 1000; // Smallest 4-digit number
-        int max = 9999; // Largest 4-digit number
-        int randomInteger = min + rand.nextInt(max - min + 1);
-        return randomInteger;
+        return 1000 + rand.nextInt(9000);
     }
 
     static Node createAccount(Node head) {
         Scanner scanner = new Scanner(System.in);
         String name;
         int PIN;
-        long accountNumber = random();
-        System.out.println("Enter your name");
+        long accountNumber = generateAccountNumber();
+
+        System.out.println("Enter your name:");
         name = scanner.nextLine();
         System.out.println("Your Account number is: " + accountNumber);
-        System.out.println("Set a PIN for your account");
-        PIN = scanner.nextInt();
+        System.out.println("Set a PIN for your account:");
+        
+        while (true) {
+            try {
+                PIN = scanner.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid PIN. Please enter a valid number:");
+                scanner.next(); // solve invalid input
+            }
+        }
 
         Node newNode = new Node(name, PIN, accountNumber);
+
         if (head == null) {
             head = newNode;
         } else {
@@ -56,7 +64,7 @@ public class BMS {
         scanner.close();
         return head;
     }
-
+    
     static Node login(Node head, long checkAccount, int checkPIN) {
         Node temp = head;
         while (temp != null) {
@@ -69,20 +77,26 @@ public class BMS {
         System.out.println("Wrong account number or password");
         return null;
     }
-
+    
     static void deposit(Node user) {
-        Scanner scanner = new Scanner(System.in);
-        double amount;
+    Scanner scanner = new Scanner(System.in);
+    double amount;
+    try {
         System.out.println("Enter amount to deposit:");
         amount = scanner.nextDouble();
         user.balance += amount;
         System.out.println("Deposit successful. Updated balance: " + user.balance);
-        scanner.close();
+    } catch (Exception e) {
+        System.out.println("Invalid input. Please enter a valid amount.");
     }
+    scanner.close();
+}
 
+    
     static void withdraw(Node user) {
-        Scanner scanner = new Scanner(System.in);
-        double amount;
+    Scanner scanner = new Scanner(System.in);
+    double amount;
+    try {
         System.out.println("Enter amount to withdraw:");
         amount = scanner.nextDouble();
         if (amount <= user.balance) {
@@ -91,9 +105,13 @@ public class BMS {
         } else {
             System.out.println("Insufficient balance");
         }
-        scanner.close();
+    } catch (Exception e) {
+        System.out.println("Invalid input. Please enter a valid amount.");
     }
+    scanner.close();
+}
 
+    
     static Node searchAccount(Node head, long accountNumber) {
         Node temp = head;
         while (temp != null) {
@@ -106,7 +124,7 @@ public class BMS {
         System.out.println("No Account Found");
         return null;
     }
-
+    
     static void updateAccount(Node head, long accountNumber, int newPIN) {
         Node temp = head;
         while (temp != null) {
@@ -118,7 +136,7 @@ public class BMS {
             temp = temp.next;
         }
     }
-
+    
     static Node deleteAccount(Node head, long accountNumber) {
         Node temp = head;
         Node prev = null;
@@ -153,15 +171,16 @@ public class BMS {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to Update Account info, Enter 4 to Delete Account, 0 to Exit");
-            ch1 = scanner.nextInt();
+            try {
+                System.out.println("\nEnter 1 to Create new Account, Enter 2 to Login, Enter 3 to Update Account info, Enter 4 to Delete Account, 0 to Exit");
+                ch1 = scanner.nextInt();
 
-            switch (ch1) {
-                case 1:
-                    head=createAccount(head);
-                    break;
-                case 2:
-                    if (head == null) {
+                switch (ch1) {
+                    case 1:
+                        head = createAccount(head);
+                        break;
+                    case 2:
+                        if (head == null) {
                         System.out.println("No Account Registered");
                     } else {
                         System.out.println("Enter Account number");
@@ -184,7 +203,7 @@ public class BMS {
                                         withdraw(currentUser);
                                         break;
                                     case 0:
-                                        currentUser = null; // Logout
+                                        currentUser = null; 
                                         break;
                                     default:
                                         System.out.println("Wrong input");
@@ -195,9 +214,9 @@ public class BMS {
                             }
                         }
                     }
-                    break;
-                case 3:
-                    if (head == null) {
+                        break;
+                    case 3:
+                        if (head == null) {
                         System.out.println("No Account Registered");
                     } else {
                         long accountNumber;
@@ -211,9 +230,9 @@ public class BMS {
                         System.out.println("Account number: " + accountNumber);
                         System.out.println("PIN: " + newPIN);
                     }
-                    break;
-                case 4:
-                    if (head == null) {
+                        break;
+                    case 4:
+                        if (head == null) {
                         System.out.println("No Account Registered");
                     } else {
                         System.out.print("Enter Account number to delete: ");
@@ -221,12 +240,17 @@ public class BMS {
                         deleteAcc = scanner.nextLong();
                         head= deleteAccount(head, deleteAcc);
                     }
-                    break;
-                case 0:
-                    scanner.close();
-                    System.exit(0);
-                default:
-                    System.out.println("Wrong input");
+                        break;
+                    case 0:
+                        System.out.println("Exiting...");
+                        scanner.close(); 
+                        System.exit(0);
+                    default:
+                        System.out.println("Wrong input. Please enter a valid option.");
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input or operation failed. Please try again.");
+                scanner.next(); // solve invalid input
             }
         }
     }
